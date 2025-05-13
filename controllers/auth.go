@@ -4,13 +4,27 @@ import (
 	"github.com/auth-api/database"
 	"github.com/auth-api/models"
 	"github.com/gofiber/fiber/v2"
-	"golang.org/x/crypto/bcrypt"
+  "golang.org/x/crypto/bcrypt"
   "github.com/golang-jwt/jwt/v4"
   "strconv"
   "time"
+
 )
 
 const SecretKey = "secret"
+
+// Register      godoc
+// @Summary      Register
+// @Description  Register
+// @Tags         accounts
+// @Accept       json
+// @Produce      json
+// @Param        q    query     string  false  "name search by q"  Format(email)
+// @Success      200  {array}   model.User
+// @Failure      400  {object}  httputil.HTTPError
+// @Failure      404  {object}  httputil.HTTPError
+// @Failure      500  {object}  httputil.HTTPError
+// @Router       /api/register [post]
 
 func Register (c *fiber.Ctx) error {
   var data map[string]string
@@ -30,6 +44,20 @@ func Register (c *fiber.Ctx) error {
 
   return c.JSON(user)
 }
+
+
+// Login         godoc
+// @Summary      Login
+// @Description  Login
+// @Tags         user
+// @Accept       json
+// @Produce      json
+// @Param        q    query     string  false  "name search by q"  Format(email)
+// @Success      200  {array}   model.User
+// @Failure      400  {object}  httputil.HTTPError
+// @Failure      404  {object}  httputil.HTTPError
+// @Failure      500  {object}  httputil.HTTPError
+// @Router       /api/login [post]
 
 func Login (c *fiber.Ctx) error {
   var data map[string]string
